@@ -3,6 +3,7 @@ package com.jocile.dsclient.services;
 import com.jocile.dsclient.dto.ClientDTO;
 import com.jocile.dsclient.entities.Client;
 import com.jocile.dsclient.repositories.ClientRepository;
+import com.jocile.dsclient.services.exceptions.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,7 +28,9 @@ public class ClientService {
   @Transactional(readOnly = true)
   public ClientDTO findById(Long id) {
     Optional<Client> obj = repository.findById(id);
-    Client entity = obj.get();
+    Client entity = obj.orElseThrow(
+      () -> new EntityNotFoundException("Entity not found")
+    );
     return new ClientDTO(entity);
   }
 }

@@ -1,6 +1,6 @@
 package com.jocile.dsclient.resources.exceptions;
 
-import com.jocile.dsclient.services.exceptions.EntityNotFoundException;
+import com.jocile.dsclient.services.exceptions.ResourceNotFoundException;
 import java.time.Instant;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-  @ExceptionHandler(EntityNotFoundException.class)
+  @ExceptionHandler(ResourceNotFoundException.class)
   public ResponseEntity<StandardError> entityNotFound(
-    EntityNotFoundException e,
+    ResourceNotFoundException e,
     HttpServletRequest request
   ) {
     StandardError err = new StandardError();

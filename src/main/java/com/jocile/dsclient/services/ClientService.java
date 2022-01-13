@@ -4,6 +4,7 @@ import com.jocile.dsclient.dto.ClientDTO;
 import com.jocile.dsclient.entities.Client;
 import com.jocile.dsclient.repositories.ClientRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,12 @@ public class ClientService {
       .stream()
       .map(x -> new ClientDTO(x))
       .collect(Collectors.toList());
+  }
+
+  @Transactional(readOnly = true)
+  public ClientDTO findById(Long id) {
+    Optional<Client> obj = repository.findById(id);
+    Client entity = obj.get();
+    return new ClientDTO(entity);
   }
 }

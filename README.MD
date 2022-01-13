@@ -26,7 +26,7 @@
 
 - Java 11 como linguagem;
 - Maven como gerenciador de dependências;
-- Banco de dados H2 percistindo 10 das seguintes propriedades:
+- Banco de dados H2 persistindo 10 das seguintes propriedades:
 - Entidade Client;
 - id : Long
 - name : String

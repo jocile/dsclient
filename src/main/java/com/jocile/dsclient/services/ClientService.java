@@ -38,12 +38,7 @@ public class ClientService {
   @Transactional
   public ClientDTO insert(ClientDTO dto) {
     Client entity = new Client();
-    entity.setName(dto.getName());
-    entity.setCpf(dto.getCpf());
-    entity.setIncome(dto.getIncome());
-    entity.setBirthDate(dto.getBirthDate());
-    entity.setChildren(dto.getChildren());
-    entity = repository.save(entity);
+    entity = SaveEntity(dto, entity);
     return new ClientDTO(entity);
   }
 
@@ -52,15 +47,20 @@ public class ClientService {
     try {
       Client entity = repository.getOne(id);
       entity.setName(dto.getName());
-      entity.setName(dto.getName());
-      entity.setCpf(dto.getCpf());
-      entity.setIncome(dto.getIncome());
-      entity.setBirthDate(dto.getBirthDate());
-      entity.setChildren(dto.getChildren());
-      entity = repository.save(entity);
+      entity = SaveEntity(dto, entity);
       return new ClientDTO(entity);
     } catch (EntityNotFoundException e) {
       throw new ResourceNotFoundException("Id not found" + id);
     }
+  }
+
+  private Client SaveEntity(ClientDTO dto, Client entity) {
+    entity.setName(dto.getName());
+    entity.setCpf(dto.getCpf());
+    entity.setIncome(dto.getIncome());
+    entity.setBirthDate(dto.getBirthDate());
+    entity.setChildren(dto.getChildren());
+    entity = repository.save(entity);
+    return entity;
   }
 }

@@ -1,6 +1,6 @@
 package com.jocile.dsclient.resources;
 
-import com.jocile.dsclient.entities.Client;
+import com.jocile.dsclient.dto.ClientDTO;
 import com.jocile.dsclient.services.ClientService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,8 @@ public class ClientResource {
   private ClientService service;
 
   @GetMapping
-  public ResponseEntity<List<Client>> findAll() {
-    List<Client> list = service.findAll();
+  public ResponseEntity<List<ClientDTO>> findAll() {
+    List<ClientDTO> list = service.findAll();
     return ResponseEntity.ok().body(list);
   }
 }
